@@ -92,21 +92,23 @@ export function EducationAdmin() {
       ) : items.length === 0 ? (
         <EmptyState icon={GraduationCap} title="No education entries" subtitle="Add your degrees and qualifications." />
       ) : (
-        <div className="grid gap-3 grid-cols-1 md:grid-cols-2">
+        <div className="grid gap-3 grid-cols-1 md:grid-cols-2 w-full overflow-hidden">
           {items.map((e) => (
-            <div key={e.id} className="group flex items-start gap-3 sm:gap-4 rounded-2xl border bg-card p-3.5 sm:p-4 shadow-soft transition-all hover:shadow-card hover:border-primary/20">
-              <div className="mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-primary text-primary-foreground">
-                <GraduationCap className="h-4 w-4" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="font-semibold text-sm sm:text-base">{e.degree}</p>
-                <p className="text-xs text-muted-foreground">{e.institution}</p>
-                <div className="mt-1 flex flex-wrap gap-1.5">
-                  {e.year && <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium">{e.year}</span>}
-                  {e.grade && <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium">{e.grade}</span>}
+            <div key={e.id} className="group flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4 rounded-2xl border bg-card p-3.5 sm:p-4 shadow-soft transition-all hover:shadow-card hover:border-primary/20 min-w-0 w-full overflow-hidden">
+              <div className="flex items-start gap-3 min-w-0 flex-1 overflow-hidden">
+                <div className="mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-primary text-primary-foreground">
+                  <GraduationCap className="h-4 w-4" />
+                </div>
+                <div className="min-w-0 flex-1 overflow-hidden">
+                  <p className="font-semibold text-sm sm:text-base truncate">{e.degree}</p>
+                  <p className="text-xs text-muted-foreground truncate">{e.institution}</p>
+                  <div className="mt-1 flex flex-wrap gap-1.5">
+                    {e.year && <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium">{e.year}</span>}
+                    {e.grade && <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium">{e.grade}</span>}
+                  </div>
                 </div>
               </div>
-              <div className="flex gap-1.5 shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+              <div className="flex items-center justify-end gap-1.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border/40 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                 <Button variant="outline" size="icon" className="rounded-full h-8 w-8 hover:border-primary/40"
                   onClick={() => { setForm({ id: e.id, degree: e.degree, institution: e.institution, year: e.year ?? "", grade: e.grade ?? "", sort_order: e.sort_order ?? 0 }); setOpen(true); }}>
                   <Pencil className="h-3.5 w-3.5" />

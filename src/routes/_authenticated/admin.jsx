@@ -74,16 +74,16 @@ function AdminPage() {
 
   /* ── Admin dashboard ───────────────────────────────────────── */
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background w-full overflow-x-hidden">
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b bg-card/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6 py-3">
+      <header className="sticky top-0 z-40 border-b bg-card/80 backdrop-blur-md w-full">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-3 sm:px-6 py-3">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <Link to="/" className="flex shrink-0 items-center gap-1 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors">
               <ArrowLeft className="h-4 w-4" /> <span className="hidden xs:inline">Site</span>
             </Link>
             <span className="text-muted-foreground/60">/</span>
-            <h1 className="font-display text-sm sm:text-base font-bold truncate">Admin Dashboard</h1>
+            <h1 className="font-display text-xs sm:text-base font-bold truncate">Admin Dashboard</h1>
           </div>
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <div className="hidden md:flex items-center gap-2 max-w-[180px]">
@@ -98,7 +98,7 @@ function AdminPage() {
       </header>
 
       {/* Main content */}
-      <main className="mx-auto max-w-6xl px-3 sm:px-6 py-6 sm:py-8">
+      <main className="mx-auto max-w-6xl px-3 sm:px-6 py-4 sm:py-8 w-full overflow-hidden">
         <Tabs defaultValue="projects" className="w-full">
           {/* Scrollable Tabs Header on Mobile */}
           <div className="w-full overflow-x-auto pb-2 scrollbar-none mb-6">

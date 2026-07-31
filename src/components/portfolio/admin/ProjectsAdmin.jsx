@@ -111,28 +111,30 @@ export function ProjectsAdmin() {
       ) : items.length === 0 ? (
         <EmptyState icon={FolderGit2} title="No projects yet" subtitle="Click 'New project' to add your first one." />
       ) : (
-        <div className="grid gap-3">
+        <div className="grid gap-3 w-full overflow-hidden">
           {items.map((p) => (
-            <div key={p.id} className="group flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-4 rounded-2xl border bg-card p-3.5 sm:p-4 shadow-soft transition-all hover:shadow-card hover:border-primary/20">
-              <div className="h-12 w-16 sm:h-14 sm:w-20 shrink-0 overflow-hidden rounded-xl bg-muted">
-                {p.image_url ? <img src={p.image_url} alt="" className="h-full w-full object-cover" /> : (
-                  <div className="flex h-full w-full items-center justify-center bg-gradient-primary">
-                    <FolderGit2 className="h-5 w-5 text-primary-foreground opacity-70" />
+            <div key={p.id} className="group flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 rounded-2xl border bg-card p-3.5 sm:p-4 shadow-soft transition-all hover:shadow-card hover:border-primary/20 min-w-0 w-full overflow-hidden">
+              <div className="flex items-center gap-3 min-w-0 flex-1 overflow-hidden">
+                <div className="h-12 w-16 sm:h-14 sm:w-20 shrink-0 overflow-hidden rounded-xl bg-muted">
+                  {p.image_url ? <img src={p.image_url} alt="" className="h-full w-full object-cover" /> : (
+                    <div className="flex h-full w-full items-center justify-center bg-gradient-primary">
+                      <FolderGit2 className="h-5 w-5 text-primary-foreground opacity-70" />
+                    </div>
+                  )}
+                </div>
+                <div className="min-w-0 flex-1 overflow-hidden">
+                  <div className="flex flex-wrap items-center gap-1.5 min-w-0">
+                    <span className="truncate font-semibold text-sm sm:text-base">{p.title}</span>
+                    {p.featured && <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium text-primary shrink-0">⭐ Featured</span>}
                   </div>
-                )}
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate font-semibold text-sm sm:text-base">
-                  {p.title}
-                  {p.featured && <span className="ml-2 rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium text-primary">⭐ Featured</span>}
-                </p>
-                <p className="truncate text-xs text-muted-foreground">{p.category} · {p.technologies?.join(", ")}</p>
-                <div className="mt-1 flex gap-2">
-                  {p.github_url && <a href={p.github_url} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline flex items-center gap-0.5"><Github className="h-3 w-3" /> Code</a>}
-                  {p.live_url && <a href={p.live_url} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline flex items-center gap-0.5"><ExternalLink className="h-3 w-3" /> Live</a>}
+                  <p className="truncate text-xs text-muted-foreground">{p.category} · {p.technologies?.join(", ")}</p>
+                  <div className="mt-1 flex gap-2">
+                    {p.github_url && <a href={p.github_url} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline flex items-center gap-0.5"><Github className="h-3 w-3" /> Code</a>}
+                    {p.live_url && <a href={p.live_url} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline flex items-center gap-0.5"><ExternalLink className="h-3 w-3" /> Live</a>}
+                  </div>
                 </div>
               </div>
-              <div className="flex gap-1.5 shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+              <div className="flex items-center justify-end gap-1.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border/40 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                 <Button variant="outline" size="icon" className="rounded-full h-8 w-8 hover:border-primary/40" onClick={() => { setForm({ id: p.id, title: p.title, description: p.description ?? "", image_url: p.image_url ?? "", github_url: p.github_url ?? "", live_url: p.live_url ?? "", category: p.category, technologies: p.technologies?.join(", ") ?? "", featured: p.featured, sort_order: p.sort_order ?? 0 }); setOpen(true); }}>
                   <Pencil className="h-3.5 w-3.5" />
                 </Button>

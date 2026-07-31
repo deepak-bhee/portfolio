@@ -96,28 +96,30 @@ export function CertificatesAdmin() {
       ) : items.length === 0 ? (
         <EmptyState icon={Award} title="No certificates yet" subtitle="Add your first certification to show it on the portfolio." />
       ) : (
-        <div className="grid gap-3">
+        <div className="grid gap-3 w-full overflow-hidden">
           {items.map((c) => (
-            <div key={c.id} className="group flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-4 rounded-2xl border bg-card p-3.5 sm:p-4 shadow-soft transition-all hover:shadow-card hover:border-primary/20">
-              <div className="h-12 w-16 sm:h-14 sm:w-20 shrink-0 overflow-hidden rounded-xl bg-muted">
-                {c.image_url ? <img src={c.image_url} alt="" className="h-full w-full object-cover" /> : (
-                  <div className="flex h-full w-full items-center justify-center bg-gradient-primary">
-                    <Award className="h-5 w-5 text-primary-foreground opacity-70" />
-                  </div>
-                )}
+            <div key={c.id} className="group flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 rounded-2xl border bg-card p-3.5 sm:p-4 shadow-soft transition-all hover:shadow-card hover:border-primary/20 min-w-0 w-full overflow-hidden">
+              <div className="flex items-center gap-3 min-w-0 flex-1 overflow-hidden">
+                <div className="h-12 w-16 sm:h-14 sm:w-20 shrink-0 overflow-hidden rounded-xl bg-muted">
+                  {c.image_url ? <img src={c.image_url} alt="" className="h-full w-full object-cover" /> : (
+                    <div className="flex h-full w-full items-center justify-center bg-gradient-primary">
+                      <Award className="h-5 w-5 text-primary-foreground opacity-70" />
+                    </div>
+                  )}
+                </div>
+                <div className="min-w-0 flex-1 overflow-hidden">
+                  <p className="truncate font-semibold text-sm sm:text-base">{c.title}</p>
+                  <p className="truncate text-xs text-muted-foreground">
+                    {c.issuer} {c.issued_on ? `· ${new Date(c.issued_on).toLocaleDateString()}` : ""}
+                  </p>
+                  {c.certificate_url && (
+                    <a href={c.certificate_url} target="_blank" rel="noreferrer" className="mt-0.5 text-xs text-primary hover:underline flex items-center gap-0.5">
+                      <ExternalLink className="h-3 w-3" /> View certificate
+                    </a>
+                  )}
+                </div>
               </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate font-semibold text-sm sm:text-base">{c.title}</p>
-                <p className="truncate text-xs text-muted-foreground">
-                  {c.issuer} {c.issued_on ? `· ${new Date(c.issued_on).toLocaleDateString()}` : ""}
-                </p>
-                {c.certificate_url && (
-                  <a href={c.certificate_url} target="_blank" rel="noreferrer" className="mt-0.5 text-xs text-primary hover:underline flex items-center gap-0.5">
-                    <ExternalLink className="h-3 w-3" /> View certificate
-                  </a>
-                )}
-              </div>
-              <div className="flex gap-1.5 shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+              <div className="flex items-center justify-end gap-1.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border/40 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                 <Button variant="outline" size="icon" className="rounded-full h-8 w-8 hover:border-primary/40"
                   onClick={() => { setForm({ id: c.id, title: c.title, issuer: c.issuer, image_url: c.image_url ?? "", certificate_url: c.certificate_url ?? "", issued_on: c.issued_on ?? "" }); setOpen(true); }}>
                   <Pencil className="h-3.5 w-3.5" />
