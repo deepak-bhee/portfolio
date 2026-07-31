@@ -102,16 +102,20 @@ export function Navbar() {
       >
         <header
           className={cn(
-            "mx-auto transition-all duration-800 ease-[cubic-bezier(0.22,1,0.36,1)]",
+            "mx-auto transition-all duration-500 ease-out",
             scrolled
-              ? "max-w-3xl rounded-full border border-white/10 bg-black/50 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.35)]"
-              : "max-w-full rounded-none border-b border-transparent bg-transparent"
+              ? open
+                ? "max-w-3xl rounded-3xl border border-white/10 bg-black/75 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+                : "max-w-3xl rounded-full border border-white/10 bg-black/50 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.35)]"
+              : open
+                ? "max-w-full rounded-b-3xl border-b border-white/10 bg-black/80 backdrop-blur-2xl shadow-2xl"
+                : "max-w-full rounded-none border-b border-transparent bg-transparent"
           )}
         >
           <div
             className={cn(
               "mx-auto flex items-center justify-between transition-all duration-500",
-              scrolled ? "px-5 py-2" : "max-w-6xl px-6 py-4"
+              scrolled ? "px-5 py-2.5" : "max-w-6xl px-6 py-4"
             )}
           >
             {/* Logo */}
@@ -183,10 +187,7 @@ export function Navbar() {
             ref={menuRef}
             className={cn(
               "overflow-hidden md:hidden transition-all duration-350",
-              scrolled
-                ? "rounded-2xl border border-white/10 bg-black/85 backdrop-blur-2xl shadow-2xl mt-2 mx-2"
-                : "border-t border-white/10 bg-black/85 backdrop-blur-2xl shadow-2xl",
-              open ? "max-h-96 opacity-100" : "max-h-0 opacity-0 pointer-events-none"
+              open ? "max-h-96 opacity-100 border-t border-white/10" : "max-h-0 opacity-0 pointer-events-none"
             )}
             style={{ transitionTimingFunction: "cubic-bezier(0.22,1,0.36,1)" }}
           >
