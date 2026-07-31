@@ -1,5 +1,5 @@
 import { QueryClientProvider } from "@tanstack/react-query";
-import { Outlet, Link, createRootRouteWithContext, useRouter, HeadContent, Scripts, } from "@tanstack/react-router";
+import { Outlet, Link, createRootRouteWithContext, useRouter, useLocation, HeadContent, Scripts, } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -119,6 +119,8 @@ function RootShell({ children }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const [mounted, setMounted] = useState(false);
+  const location = useLocation();
+  const isAuthOrAdmin = location.pathname.startsWith("/admin") || location.pathname.startsWith("/auth");
   const streakCount = useResponsiveStreaks();
   useEffect(() => setMounted(true), []);
 
@@ -140,11 +142,8 @@ function RootComponent() {
         />
       </div>
 
-      {/* ── Fixed slight background blur overlay (all pages) ── */}
-
-
-      {/* ── Navbar (all pages) ── */}
-      <Navbar />
+      {/* ── Navbar (only on main portfolio pages) ── */}
+      {!isAuthOrAdmin && <Navbar />}
 
       {/* ── Route content ── */}
       <div style={{ position: "relative", zIndex: 1 }}>
