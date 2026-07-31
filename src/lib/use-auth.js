@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
+const ALLOWED_ADMIN_EMAIL = "deepakbhee2006@gmail.com";
+
 export function useAuth() {
   const [user, setUser]           = useState(null);
   const [isAdmin, setIsAdmin]     = useState(false);
@@ -15,12 +17,16 @@ export function useAuth() {
       if (cancelled) return;
       setUser(u);
 
-      if (u) {
+      const isOwner = u?.email?.toLowerCase() === ALLOWED_ADMIN_EMAIL;
+
+      if (u && isOwner) {
         const { data } = await supabase
           .from("user_roles")
           .select("role")
           .eq("user_id", u.id);
         if (!cancelled) setIsAdmin(!!data?.some((r) => r.role === "admin"));
+      } else {
+        if (!cancelled) setIsAdmin(false);
       }
       if (!cancelled) setLoading(false);
     }
@@ -32,7 +38,10 @@ export function useAuth() {
       setUser(u);
       setIsAdmin(false);
       setLoading(true);
-      if (u) {
+
+      const isOwner = u?.email?.toLowerCase() === ALLOWED_ADMIN_EMAIL;
+
+      if (u && isOwner) {
         const { data } = await supabase
           .from("user_roles")
           .select("role")

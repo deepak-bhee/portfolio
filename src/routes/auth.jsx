@@ -33,7 +33,7 @@ function AuthPage() {
     e.preventDefault();
     if (!email.trim() || !password) return toast.error("Email and password are required");
     if (email.trim().toLowerCase() !== ALLOWED_EMAIL) {
-      return toast.error(`Access restricted: Only ${ALLOWED_EMAIL} can log in.`);
+      return toast.error("Access restricted: Only the owner is authorized to log in.");
     }
     setLoading(true);
     try {
@@ -92,7 +92,7 @@ function AuthPage() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="deepakbhee2006@gmail.com"
+                placeholder="Enter your email"
                 className="mt-1.5 rounded-xl focus:ring-2 focus:ring-primary/30 focus:border-primary"
               />
             </div>
