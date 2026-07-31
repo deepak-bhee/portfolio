@@ -10,7 +10,7 @@ import ProfileCard from "./ProfileCard";
 
 
 export function Hero() {
-  const leftRef  = useRef(null);
+  const leftRef = useRef(null);
   const rightRef = useRef(null);
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export function Hero() {
               <a href="#contact">Hire Me <ArrowRight className="ml-1 h-4 w-4" /></a>
             </Button>
             <Button size="lg" variant="outline" className="rounded-full" asChild>
-              <a href="/Deepak-resume.pdf" download>
+              <a href="/Deepak-CV.pdf" download>
                 <Download className="mr-2 h-4 w-4" /> Resume
               </a>
             </Button>
@@ -68,9 +68,9 @@ export function Hero() {
 
           <div className="mt-8 flex items-center gap-3">
             {[
-              { icon: Github,   href: "https://github.com/deepak-bhee",                   label: "GitHub"   },
-              { icon: Linkedin, href: "https://www.linkedin.com/in/deepak-b-60620b375/",  label: "LinkedIn" },
-              { icon: Mail,     href: "mailto:deepakbhee2006@gmail.com",                  label: "Email"    },
+              { icon: Github, href: "https://github.com/deepak-bhee", label: "GitHub" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/deepak-b-60620b375/", label: "LinkedIn" },
+              { icon: Mail, href: "mailto:deepakbhee2006@gmail.com", label: "Email" },
             ].map(({ icon: Icon, href, label }) => (
               <a key={label} href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}

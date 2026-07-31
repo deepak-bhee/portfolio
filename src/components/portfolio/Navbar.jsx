@@ -80,6 +80,16 @@ export function Navbar() {
       {/* Scroll progress bar */}
       <div id="scroll-progress" aria-hidden="true" />
 
+      {/* Mobile backdrop blur overlay when menu is open */}
+      <div
+        className={cn(
+          "fixed inset-0 z-40 bg-black/65 backdrop-blur-md md:hidden transition-all duration-300",
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        )}
+        onClick={() => setOpen(false)}
+        aria-hidden="true"
+      />
+
       {/*
         Outer wrapper: fixed at top.
         Pads top and sides when scrolled so the pill can float.
@@ -174,8 +184,8 @@ export function Navbar() {
             className={cn(
               "overflow-hidden md:hidden transition-all duration-350",
               scrolled
-                ? "rounded-b-3xl"
-                : "border-t border-white/10 bg-black/80 backdrop-blur-xl",
+                ? "rounded-2xl border border-white/10 bg-black/85 backdrop-blur-2xl shadow-2xl mt-2 mx-2"
+                : "border-t border-white/10 bg-black/85 backdrop-blur-2xl shadow-2xl",
               open ? "max-h-96 opacity-100" : "max-h-0 opacity-0 pointer-events-none"
             )}
             style={{ transitionTimingFunction: "cubic-bezier(0.22,1,0.36,1)" }}
