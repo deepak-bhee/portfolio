@@ -76,12 +76,12 @@ export function ExperiencesAdmin() {
               <Plus className="mr-1 h-4 w-4" /> New entry
             </Button>
           </DialogTrigger>
-          <DialogContent className="rounded-3xl sm:max-w-md">
+          <DialogContent className="max-h-[85vh] overflow-y-auto rounded-3xl w-[92vw] sm:max-w-md p-4 sm:p-6">
             <DialogHeader><DialogTitle>{form.id ? "Edit entry" : "New learning entry"}</DialogTitle></DialogHeader>
             <div className="space-y-4 pt-1">
               <Field label="Role / Title *"><AdminInput value={form.role} onChange={set("role")} placeholder="Junior Developer" /></Field>
               <Field label="Company / Platform *"><AdminInput value={form.company} onChange={set("company")} placeholder="Self-taught / Udemy / etc." /></Field>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Field label="Start date"><AdminInput type="date" value={form.start_date} onChange={set("start_date")} /></Field>
                 <Field label="End date"><AdminInput type="date" value={form.end_date} onChange={set("end_date")} disabled={form.is_current} /></Field>
               </div>
@@ -106,19 +106,19 @@ export function ExperiencesAdmin() {
       ) : (
         <div className="grid gap-3">
           {items.map((it) => (
-            <div key={it.id} className="group flex items-start gap-4 rounded-2xl border bg-card p-4 shadow-soft transition-all hover:shadow-card hover:border-primary/20">
+            <div key={it.id} className="group flex flex-wrap sm:flex-nowrap items-start gap-3 sm:gap-4 rounded-2xl border bg-card p-3.5 sm:p-4 shadow-soft transition-all hover:shadow-card hover:border-primary/20">
               <div className="mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-primary text-primary-foreground">
                 <BookOpen className="h-4 w-4" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="font-semibold">{it.role}</p>
+                <p className="font-semibold text-sm sm:text-base">{it.role}</p>
                 <p className="text-sm text-muted-foreground">{it.company}</p>
                 <p className="text-xs text-primary mt-0.5">
                   {fmt(it.start_date)}{it.start_date ? " — " : ""}{it.is_current ? "Present" : fmt(it.end_date)}
                 </p>
                 {it.description && <p className="mt-1.5 text-sm text-muted-foreground line-clamp-2">{it.description}</p>}
               </div>
-              <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="flex gap-1.5 shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                 <Button variant="outline" size="icon" className="rounded-full h-8 w-8 hover:border-primary/40"
                   onClick={() => { setForm({ id: it.id, company: it.company, role: it.role, start_date: it.start_date ?? "", end_date: it.end_date ?? "", is_current: it.is_current, description: it.description ?? "", sort_order: it.sort_order ?? 0 }); setOpen(true); }}>
                   <Pencil className="h-3.5 w-3.5" />

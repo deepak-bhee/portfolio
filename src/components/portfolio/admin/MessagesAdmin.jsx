@@ -73,7 +73,7 @@ export function MessagesAdmin() {
                 )}
               >
                 {/* Header row — always visible */}
-                <div className="flex cursor-pointer items-start gap-3 p-4" onClick={() => { setExpanded(isOpen ? null : m.id); if (!m.is_read) toggleRead(m); }}>
+                <div className="flex cursor-pointer items-start gap-2.5 sm:gap-3 p-3.5 sm:p-4" onClick={() => { setExpanded(isOpen ? null : m.id); if (!m.is_read) toggleRead(m); }}>
                   <div className={cn("mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-xl", m.is_read ? "bg-muted text-muted-foreground" : "bg-primary/15 text-primary")}>
                     {m.is_read ? <MailOpen className="h-4 w-4" /> : <Mail className="h-4 w-4" />}
                   </div>

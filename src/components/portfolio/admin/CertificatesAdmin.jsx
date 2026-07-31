@@ -70,7 +70,7 @@ export function CertificatesAdmin() {
               <Plus className="mr-1 h-4 w-4" /> New certificate
             </Button>
           </DialogTrigger>
-          <DialogContent className="rounded-3xl sm:max-w-md">
+          <DialogContent className="max-h-[85vh] overflow-y-auto rounded-3xl w-[92vw] sm:max-w-md p-4 sm:p-6">
             <DialogHeader><DialogTitle>{form.id ? "Edit certificate" : "New certificate"}</DialogTitle></DialogHeader>
             <div className="space-y-4 pt-1">
               <Field label="Title *"><AdminInput value={form.title} onChange={set("title")} placeholder="AWS Certified Developer" /></Field>
@@ -98,8 +98,8 @@ export function CertificatesAdmin() {
       ) : (
         <div className="grid gap-3">
           {items.map((c) => (
-            <div key={c.id} className="group flex items-center gap-4 rounded-2xl border bg-card p-4 shadow-soft transition-all hover:shadow-card hover:border-primary/20">
-              <div className="h-14 w-20 shrink-0 overflow-hidden rounded-xl bg-muted">
+            <div key={c.id} className="group flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-4 rounded-2xl border bg-card p-3.5 sm:p-4 shadow-soft transition-all hover:shadow-card hover:border-primary/20">
+              <div className="h-12 w-16 sm:h-14 sm:w-20 shrink-0 overflow-hidden rounded-xl bg-muted">
                 {c.image_url ? <img src={c.image_url} alt="" className="h-full w-full object-cover" /> : (
                   <div className="flex h-full w-full items-center justify-center bg-gradient-primary">
                     <Award className="h-5 w-5 text-primary-foreground opacity-70" />
@@ -107,7 +107,7 @@ export function CertificatesAdmin() {
                 )}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate font-semibold">{c.title}</p>
+                <p className="truncate font-semibold text-sm sm:text-base">{c.title}</p>
                 <p className="truncate text-xs text-muted-foreground">
                   {c.issuer} {c.issued_on ? `· ${new Date(c.issued_on).toLocaleDateString()}` : ""}
                 </p>
@@ -117,7 +117,7 @@ export function CertificatesAdmin() {
                   </a>
                 )}
               </div>
-              <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="flex gap-1.5 shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                 <Button variant="outline" size="icon" className="rounded-full h-8 w-8 hover:border-primary/40"
                   onClick={() => { setForm({ id: c.id, title: c.title, issuer: c.issuer, image_url: c.image_url ?? "", certificate_url: c.certificate_url ?? "", issued_on: c.issued_on ?? "" }); setOpen(true); }}>
                   <Pencil className="h-3.5 w-3.5" />

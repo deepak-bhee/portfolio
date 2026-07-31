@@ -303,7 +303,7 @@ const ProfileCardComponent = ({
   return (
     <div
       ref={wrapRef}
-      className={`relative touch-none ${className}`.trim()}
+      className={`relative touch-none w-full max-w-[340px] sm:max-w-[380px] mx-auto ${className}`.trim()}
       style={{ perspective: '500px', transform: 'translate3d(0,0,0.1px)', ...cardStyle }}
     >
       {behindGlowEnabled && (
@@ -316,12 +316,13 @@ const ProfileCardComponent = ({
           }}
         />
       )}
-      <div ref={shellRef} className="relative z-[1] group">
+      <div ref={shellRef} className="relative z-[1] group w-full">
         <section
-          className="grid relative overflow-hidden"
+          className="grid relative overflow-hidden w-full"
           style={{
-            height: '80svh',
-            maxHeight: '540px',
+            width: '100%',
+            height: 'auto',
+            maxHeight: '520px',
             aspectRatio: '0.718',
             borderRadius: cardRadius,
             boxShadow: 'rgba(0,0,0,0.8) calc((var(--pointer-from-left)*10px) - 3px) calc((var(--pointer-from-top)*20px) - 6px) 20px -5px',

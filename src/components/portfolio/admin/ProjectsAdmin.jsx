@@ -74,7 +74,7 @@ export function ProjectsAdmin() {
               <Plus className="mr-1 h-4 w-4" /> New project
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-h-[90vh] overflow-y-auto rounded-3xl sm:max-w-lg">
+          <DialogContent className="max-h-[85vh] overflow-y-auto rounded-3xl w-[92vw] sm:max-w-lg p-4 sm:p-6">
             <DialogHeader><DialogTitle>{form.id ? "Edit project" : "New project"}</DialogTitle></DialogHeader>
             <div className="space-y-4 pt-1">
               <Field label="Title *"><AdminInput value={form.title} onChange={set("title")} placeholder="My Awesome Project" /></Field>
@@ -83,11 +83,11 @@ export function ProjectsAdmin() {
                 <AdminInput value={form.image_url} onChange={set("image_url")} placeholder="https://..." />
                 <ImagePreview url={form.image_url} />
               </Field>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Field label="GitHub URL"><AdminInput value={form.github_url} onChange={set("github_url")} placeholder="https://github.com/..." /></Field>
                 <Field label="Live URL"><AdminInput value={form.live_url} onChange={set("live_url")} placeholder="https://..." /></Field>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Field label="Category"><AdminInput value={form.category} onChange={set("category")} placeholder="Web" /></Field>
                 <Field label="Sort order"><AdminInput type="number" value={form.sort_order} onChange={set("sort_order")} /></Field>
               </div>
@@ -113,8 +113,8 @@ export function ProjectsAdmin() {
       ) : (
         <div className="grid gap-3">
           {items.map((p) => (
-            <div key={p.id} className="group flex items-center gap-4 rounded-2xl border bg-card p-4 shadow-soft transition-all hover:shadow-card hover:border-primary/20">
-              <div className="h-14 w-20 shrink-0 overflow-hidden rounded-xl bg-muted">
+            <div key={p.id} className="group flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-4 rounded-2xl border bg-card p-3.5 sm:p-4 shadow-soft transition-all hover:shadow-card hover:border-primary/20">
+              <div className="h-12 w-16 sm:h-14 sm:w-20 shrink-0 overflow-hidden rounded-xl bg-muted">
                 {p.image_url ? <img src={p.image_url} alt="" className="h-full w-full object-cover" /> : (
                   <div className="flex h-full w-full items-center justify-center bg-gradient-primary">
                     <FolderGit2 className="h-5 w-5 text-primary-foreground opacity-70" />
@@ -122,7 +122,7 @@ export function ProjectsAdmin() {
                 )}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate font-semibold">
+                <p className="truncate font-semibold text-sm sm:text-base">
                   {p.title}
                   {p.featured && <span className="ml-2 rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium text-primary">⭐ Featured</span>}
                 </p>
@@ -132,7 +132,7 @@ export function ProjectsAdmin() {
                   {p.live_url && <a href={p.live_url} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline flex items-center gap-0.5"><ExternalLink className="h-3 w-3" /> Live</a>}
                 </div>
               </div>
-              <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="flex gap-1.5 shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                 <Button variant="outline" size="icon" className="rounded-full h-8 w-8 hover:border-primary/40" onClick={() => { setForm({ id: p.id, title: p.title, description: p.description ?? "", image_url: p.image_url ?? "", github_url: p.github_url ?? "", live_url: p.live_url ?? "", category: p.category, technologies: p.technologies?.join(", ") ?? "", featured: p.featured, sort_order: p.sort_order ?? 0 }); setOpen(true); }}>
                   <Pencil className="h-3.5 w-3.5" />
                 </Button>

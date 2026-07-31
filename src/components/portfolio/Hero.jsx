@@ -83,7 +83,7 @@ export function Hero() {
         </div>
 
         {/* ── Right: ProfileCard ───────────────────────────────────────── */}
-        <div ref={rightRef} className="flex items-center justify-center">
+        <div ref={rightRef} className="flex items-center justify-center w-full overflow-hidden py-2">
           <ProfileCard
             name="Deepak B"
             title="Full-Stack Developer"
