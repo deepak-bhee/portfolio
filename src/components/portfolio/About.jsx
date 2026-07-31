@@ -7,19 +7,19 @@ const cards = [
     icon: Code2,
     title: "What I do",
     body: "Full-stack web apps with React, Node.js and modern databases. Clean code, strong DX, scalable architecture.",
-    accent: "from-violet-500 to-purple-600",
+    accent: "from-white/15 to-white/5",
   },
   {
     icon: Briefcase,
     title: "Learning",
     body: "Learning web development through projects, practice, and continuous improvement.",
-    accent: "from-blue-500 to-indigo-600",
+    accent: "from-white/15 to-white/5",
   },
   {
     icon: GraduationCap,
     title: "Education",
     body: "Computer Science graduate with a focus on web technologies, algorithms and system design.",
-    accent: "from-emerald-500 to-teal-600",
+    accent: "from-white/15 to-white/5",
   },
 ];
 

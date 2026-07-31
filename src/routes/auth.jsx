@@ -6,6 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
+const ALLOWED_EMAIL = "deepakbhee2006@gmail.com";
+
 export const Route = createFileRoute("/auth")({
   head: () => ({ meta: [{ title: "Admin Sign in — Portfolio" }, { name: "robots", content: "noindex" }] }),
   component: AuthPage,
@@ -13,7 +15,6 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate   = useNavigate();
-  const [mode, setMode]         = useState("signin");
   const [email, setEmail]       = useState("");
   const [password, setPassword] = useState("");
   const [showPw, setShowPw]     = useState(false);
@@ -31,27 +32,18 @@ function AuthPage() {
   async function onSubmit(e) {
     e.preventDefault();
     if (!email.trim() || !password) return toast.error("Email and password are required");
+    if (email.trim().toLowerCase() !== ALLOWED_EMAIL) {
+      return toast.error(`Access restricted: Only ${ALLOWED_EMAIL} can log in.`);
+    }
     setLoading(true);
     try {
-      if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({
-          email, password,
-          options: { emailRedirectTo: `${window.location.origin}/admin` },
-        });
-        if (error) throw error;
-        toast.success("Account created! Check your email to confirm.");
-      } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-        toast.success("Welcome back! 👋");
-        navigate({ to: "/admin" });
-      }
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+      toast.success("Welcome back! 👋");
+      navigate({ to: "/admin" });
     } catch (err) {
       const msg = err.message ?? "Something went wrong";
-      // Friendlier messages
       if (msg.includes("Invalid login")) toast.error("Incorrect email or password.");
-      else if (msg.includes("already registered")) toast.error("This email is already registered. Sign in instead.");
-      else if (msg.includes("Password should")) toast.error("Password must be at least 6 characters.");
       else toast.error(msg);
     } finally {
       setLoading(false);
@@ -84,17 +76,13 @@ function AuthPage() {
             <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-glow">
               <LogIn className="h-5 w-5" />
             </div>
-            <h1 className="mt-4 font-display text-2xl font-bold">
-              {mode === "signin" ? "Admin sign in" : "Create account"}
-            </h1>
+            <h1 className="mt-4 font-display text-2xl font-bold">Admin sign in</h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              {mode === "signin"
-                ? "Access the dashboard to manage your portfolio."
-                : "The first account gets promoted to admin by the project owner."}
+              Access the dashboard to manage your portfolio.
             </p>
           </div>
 
-          {/* Form */}
+          {/* Form — sign in only, no signup */}
           <form onSubmit={onSubmit} className="space-y-4">
             <div>
               <label className="text-xs font-medium">Email</label>
@@ -104,7 +92,7 @@ function AuthPage() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
+                placeholder="deepakbhee2006@gmail.com"
                 className="mt-1.5 rounded-xl focus:ring-2 focus:ring-primary/30 focus:border-primary"
               />
             </div>
@@ -116,7 +104,7 @@ function AuthPage() {
                   type={showPw ? "text" : "password"}
                   required
                   minLength={6}
-                  autoComplete={mode === "signin" ? "current-password" : "new-password"}
+                  autoComplete="current-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
@@ -141,20 +129,9 @@ function AuthPage() {
             >
               {loading
                 ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait…</>
-                : mode === "signin" ? "Sign in" : "Create account"}
+                : "Sign in"}
             </Button>
           </form>
-
-          {/* Toggle mode */}
-          <p className="mt-5 text-center text-sm text-muted-foreground">
-            {mode === "signin" ? "Don't have an account? " : "Already have an account? "}
-            <button
-              onClick={() => { setMode(mode === "signin" ? "signup" : "signin"); setPassword(""); }}
-              className="font-semibold text-primary hover:underline transition-colors"
-            >
-              {mode === "signin" ? "Create one" : "Sign in"}
-            </button>
-          </p>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -12,19 +12,19 @@ gsap.registerPlugin(ScrollTrigger);
 export function useSmoothScroll() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.25,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smooth: true,
-      smoothTouch: false,
+      lerp: 0.08,           // smoothing factor (0–1, lower = smoother)
+      smoothWheel: true,    // smooth mouse-wheel scroll
+      smoothTouch: false,   // keep native touch scrolling on mobile
     });
 
     // Sync Lenis with GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
 
-    const raf = gsap.ticker.add((time) => {
+    // Tick Lenis inside GSAP's RAF loop
+    const rafCallback = (time) => {
       lenis.raf(time * 1000);
-    });
-
+    };
+    gsap.ticker.add(rafCallback);
     gsap.ticker.lagSmoothing(0);
 
     // Smooth anchor scrolling for nav links
@@ -39,7 +39,7 @@ export function useSmoothScroll() {
 
     return () => {
       lenis.destroy();
-      gsap.ticker.remove(raf);
+      gsap.ticker.remove(rafCallback);
       document.removeEventListener("click", handleAnchorClick);
       ScrollTrigger.getAll().forEach((st) => st.kill());
     };

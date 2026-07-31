@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Navbar } from "@/components/portfolio/Navbar";
 import { Hero } from "@/components/portfolio/Hero";
 import { About } from "@/components/portfolio/About";
 import { Skills } from "@/components/portfolio/Skills";
@@ -12,21 +11,22 @@ import { Footer } from "@/components/portfolio/Footer";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
 export const Route = createFileRoute("/")({
-    head: () => ({
-        meta: [
-            { title: "Deepak — Full-Stack Developer" },
-            { name: "description", content: "Portfolio of Deepak, a full-stack developer crafting fast, accessible, and beautiful web products with React, Node.js and modern cloud tools." },
-            { property: "og:title", content: "Deepak — Full-Stack Developer" },
-            { property: "og:description", content: "Projects, learning, and ways to get in touch." },
-        ],
-    }),
-    component: Index,
+  head: () => ({
+    meta: [
+      { title: "Deepak — Full-Stack Developer" },
+      { name: "description", content: "Portfolio of Deepak, a full-stack developer crafting fast, accessible, and beautiful web products with React, Node.js and modern cloud tools." },
+      { property: "og:title", content: "Deepak — Full-Stack Developer" },
+      { property: "og:description", content: "Projects, learning, and ways to get in touch." },
+    ],
+  }),
+  component: Index,
 });
+
 function Index() {
   useSmoothScroll();
+
   return (
-    <div className="min-h-screen bg-background animate-page-in">
-      <Navbar />
+    <div className="min-h-screen animate-page-in">
       <main>
         <Hero />
         <About />

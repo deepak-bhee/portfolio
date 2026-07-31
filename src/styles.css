@@ -13,7 +13,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* =========================
-   Design tokens — Purple #6C3CF0 portfolio
+   Design tokens — Blank / neutral
    ========================= */
 
 @theme inline {
@@ -48,138 +48,106 @@
   --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", "Poppins", ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-soft: 0 4px 20px -4px oklch(0.55 0.22 285 / 0.10);
-  --shadow-card: 0 10px 30px -10px oklch(0.55 0.22 285 / 0.18);
-  --shadow-glow: 0 0 40px oklch(0.55 0.22 285 / 0.35);
+  --shadow-soft: 0 4px 20px -4px rgb(0 0 0 / 0.4);
+  --shadow-card: 0 10px 30px -10px rgb(0 0 0 / 0.5);
+  --shadow-glow: 0 0 40px rgb(255 255 255 / 0.05);
 }
 
+/* ── Tokens (single dark neutral theme, no colour) ────────────── */
 :root {
   --radius: 1rem;
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.18 0.03 280);
+  /* Background: fully transparent — you provide the bg */
+  --background: transparent;
+  --foreground: rgb(255 255 255);
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.03 280);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.03 280);
+  --card: rgb(255 255 255 / 0.06);
+  --card-foreground: rgb(255 255 255);
+  --popover: rgb(10 10 10 / 0.80);
+  --popover-foreground: rgb(255 255 255);
 
-  /* Purple #6C3CF0 */
-  --primary: oklch(0.55 0.24 285);
-  --primary-foreground: oklch(0.99 0.005 280);
-  --primary-glow: oklch(0.72 0.20 295);
+  --primary: rgb(255 255 255);
+  --primary-foreground: rgb(0 0 0);
+  --primary-glow: rgb(200 200 200);
 
-  --secondary: oklch(0.965 0.012 285);
-  --secondary-foreground: oklch(0.25 0.05 285);
+  --secondary: rgb(255 255 255 / 0.08);
+  --secondary-foreground: rgb(255 255 255);
 
-  --muted: oklch(0.97 0.008 285);
-  --muted-foreground: oklch(0.50 0.03 280);
+  --muted: rgb(255 255 255 / 0.06);
+  --muted-foreground: rgb(180 180 180);
 
-  --accent: oklch(0.95 0.04 295);
-  --accent-foreground: oklch(0.30 0.15 285);
+  --accent: rgb(255 255 255 / 0.10);
+  --accent-foreground: rgb(255 255 255);
 
-  --destructive: oklch(0.60 0.24 27);
-  --destructive-foreground: oklch(0.99 0 0);
+  --destructive: rgb(220 60 60);
+  --destructive-foreground: rgb(255 255 255);
 
-  --border: oklch(0.93 0.012 285);
-  --input: oklch(0.93 0.012 285);
-  --ring: oklch(0.55 0.24 285);
+  --border: rgb(255 255 255 / 0.10);
+  --input: rgb(255 255 255 / 0.08);
+  --ring: rgb(255 255 255 / 0.30);
 
-  --gradient-primary: linear-gradient(135deg, oklch(0.55 0.24 285), oklch(0.72 0.20 295));
-  --gradient-soft: linear-gradient(180deg, oklch(0.985 0.01 285), oklch(1 0 0));
-  --gradient-hero: radial-gradient(circle at 20% 20%, oklch(0.92 0.08 295 / 0.6), transparent 50%),
-                   radial-gradient(circle at 80% 70%, oklch(0.88 0.10 280 / 0.5), transparent 55%);
-}
-
-.dark {
-  --background: oklch(0.13 0.02 280);
-  --foreground: oklch(0.97 0.01 280);
-
-  --card: oklch(0.18 0.03 282);
-  --card-foreground: oklch(0.97 0.01 280);
-  --popover: oklch(0.18 0.03 282);
-  --popover-foreground: oklch(0.97 0.01 280);
-
-  --primary: oklch(0.70 0.22 290);
-  --primary-foreground: oklch(0.13 0.02 280);
-  --primary-glow: oklch(0.78 0.18 295);
-
-  --secondary: oklch(0.23 0.04 282);
-  --secondary-foreground: oklch(0.97 0.01 280);
-
-  --muted: oklch(0.22 0.03 282);
-  --muted-foreground: oklch(0.72 0.02 280);
-
-  --accent: oklch(0.28 0.08 290);
-  --accent-foreground: oklch(0.97 0.01 280);
-
-  --destructive: oklch(0.65 0.22 22);
-  --destructive-foreground: oklch(0.99 0 0);
-
-  --border: oklch(1 0 0 / 0.10);
-  --input: oklch(1 0 0 / 0.14);
-  --ring: oklch(0.70 0.22 290);
-
-  --gradient-primary: linear-gradient(135deg, oklch(0.62 0.24 285), oklch(0.78 0.18 295));
-  --gradient-soft: linear-gradient(180deg, oklch(0.15 0.025 282), oklch(0.13 0.02 280));
-  --gradient-hero: radial-gradient(circle at 20% 20%, oklch(0.35 0.18 290 / 0.45), transparent 55%),
-                   radial-gradient(circle at 80% 70%, oklch(0.30 0.18 280 / 0.40), transparent 55%);
+  /* No colour gradients — neutral white shimmer */
+  --gradient-primary: linear-gradient(135deg, rgb(255 255 255 / 0.9), rgb(180 180 180 / 0.7));
+  --gradient-soft: linear-gradient(180deg, rgb(255 255 255 / 0.03), transparent);
+  --gradient-hero: none;
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
-    /* Baseline smooth transitions for all interactive elements */
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, opacity, box-shadow, transform, filter, backdrop-filter;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 200ms;
   }
-  /* Never animate layout/size by default to avoid jank */
   *, *::before, *::after { box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    /* Dark fallback until the background is added */
+    background: #090a12;
+  }
 
   body {
-    background: var(--color-background);
+    /* Transparent — background image/canvas goes behind */
+    background: transparent;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    min-height: 100vh;
   }
 
-  h1, h2, h3, h4, h5 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    color: rgb(255 255 255);
+  }
 
-  /* Beautiful text selection */
+  p, span, li { color: inherit; }
+
   ::selection {
-    background: oklch(0.55 0.24 285 / 0.25);
-    color: oklch(0.18 0.03 280);
-  }
-  .dark ::selection {
-    background: oklch(0.70 0.22 290 / 0.35);
-    color: oklch(0.97 0.01 280);
+    background: rgb(255 255 255 / 0.20);
+    color: rgb(255 255 255);
   }
 
-  /* Accessible focus ring — only shown for keyboard nav */
   :focus-visible {
     outline: 2px solid var(--color-ring);
     outline-offset: 3px;
     border-radius: 6px;
   }
-
-  /* Remove outline for mouse focus */
   :focus:not(:focus-visible) { outline: none; }
 
-  /* Smooth scrollbar (Firefox) */
-  html { scrollbar-color: oklch(0.55 0.24 285 / 0.4) transparent; scrollbar-width: thin; }
-  ::-webkit-scrollbar { width: 6px; }
+  /* Neutral thin scrollbar */
+  html { scrollbar-color: rgb(255 255 255 / 0.15) transparent; scrollbar-width: thin; }
+  ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: oklch(0.55 0.24 285 / 0.4); border-radius: 9999px; }
-  ::-webkit-scrollbar-thumb:hover { background: oklch(0.55 0.24 285 / 0.65); }
+  ::-webkit-scrollbar-thumb { background: rgb(255 255 255 / 0.15); border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgb(255 255 255 / 0.30); }
 }
 
 /* ============================================================
-   Custom Utilities
+   Utilities
    ============================================================ */
 
 @utility gradient-text {
@@ -189,17 +157,20 @@
   color: transparent;
 }
 @utility bg-gradient-primary { background-image: var(--gradient-primary); }
-@utility bg-gradient-hero { background-image: var(--gradient-hero); }
+@utility bg-gradient-hero { background: var(--gradient-hero); }
 @utility shadow-soft { box-shadow: var(--shadow-soft); }
 @utility shadow-card { box-shadow: var(--shadow-card); }
 @utility shadow-glow { box-shadow: var(--shadow-glow); }
+
+/* Glass — works on any background */
 @utility glass {
-  background: color-mix(in oklch, var(--color-card) 70%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgb(255 255 255 / 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgb(255 255 255 / 0.10);
 }
 
-/* ── Hero blobs ─────────────────────────────────────────────── */
+/* ── Animations ─────────────────────────────────────────────── */
 @keyframes blob {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33%  { transform: translate(30px, -20px) scale(1.08); }
@@ -219,45 +190,41 @@
 }
 @utility animate-float { animation: float 5s ease-in-out infinite; }
 
-/* ── Shimmer skeleton ───────────────────────────────────────── */
 @keyframes shimmer {
   0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  100% { background-position:  200% 0; }
 }
 @utility animate-shimmer {
   background: linear-gradient(
     90deg,
-    var(--color-muted) 25%,
-    color-mix(in oklch, var(--color-muted) 60%, var(--color-card)) 50%,
-    var(--color-muted) 75%
+    rgb(255 255 255 / 0.05) 25%,
+    rgb(255 255 255 / 0.10) 50%,
+    rgb(255 255 255 / 0.05) 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.6s ease-in-out infinite;
 }
 
-/* ── Skill bar animated fill ────────────────────────────────── */
-@keyframes bar-fill {
-  from { width: 0; }
-}
+@keyframes bar-fill { from { width: 0; } }
 @utility animate-bar-fill {
   animation: bar-fill 1s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
-/* ── Scroll-progress bar (top of page) ──────────────────────── */
+/* ── Scroll progress bar ────────────────────────────────────── */
 #scroll-progress {
   position: fixed;
   top: 0;
   left: 0;
-  height: 3px;
+  height: 2px;
   width: 0%;
-  background: var(--gradient-primary);
+  background: rgb(255 255 255 / 0.5);
   z-index: 9999;
   border-radius: 0 2px 2px 0;
   transition: width 0.08s linear;
   pointer-events: none;
 }
 
-/* ── Page-transition fade ───────────────────────────────────── */
+/* ── Page transition ─────────────────────────────────────────── */
 @keyframes page-in {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -266,21 +233,20 @@
   animation: page-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* ── Back-to-top button appear/disappear ────────────────────── */
 @keyframes scale-in {
   from { opacity: 0; transform: scale(0.7) translateY(8px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 @utility animate-scale-in { animation: scale-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
-/* ── Navbar active underline dot ───────────────────────────── */
+/* ── Navbar active ───────────────────────────────────────────── */
 @utility nav-active {
-  color: var(--color-foreground);
-  background-color: var(--color-accent);
+  color: rgb(255 255 255);
+  background-color: rgb(255 255 255 / 0.12);
   font-weight: 600;
 }
 
-/* ── Card press effect ──────────────────────────────────────── */
+/* ── Card press ──────────────────────────────────────────────── */
 @utility card-press {
   transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s;
 }

@@ -43,7 +43,6 @@ export function Contact() {
 
   return (
     <section id="contact" className="relative py-20 md:py-28" ref={ref}>
-      <div className="absolute inset-0 -z-10 bg-gradient-hero opacity-60" />
       <div className="mx-auto max-w-6xl px-5">
         <div data-reveal>
           <SectionHeader
